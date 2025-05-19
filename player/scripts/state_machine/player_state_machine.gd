@@ -1,5 +1,5 @@
 @icon ("res://player/sprites/icon_state_machine_16x16.png")
-class_name PlayerStateMachine extends Node
+class_name PlayerStateMachine extends Node2D
 
 var states : Array [ PlayerState ]
 var current_state : PlayerState :

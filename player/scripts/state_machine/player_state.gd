@@ -1,4 +1,4 @@
-class_name PlayerState extends Node
+class_name PlayerState extends Node2D
 
 static var player : Player
 static var state_machine : PlayerStateMachine

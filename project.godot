@@ -30,6 +30,12 @@ jump={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Player"
+2d_physics/layer_5="Terrain"
+2d_physics/layer_6="One Way Platforms"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

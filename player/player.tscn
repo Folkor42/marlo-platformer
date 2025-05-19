@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://couf5gmvkuywd"]
+[gd_scene load_steps=22 format=3 uid="uid://couf5gmvkuywd"]
 
 [ext_resource type="Texture2D" uid="uid://c8nskysgaxrnb" path="res://player/sprites/marlo.png" id="1_oul6g"]
 [ext_resource type="Script" uid="uid://rlj3e6qxevha" path="res://player/player.gd" id="1_rkbax"]
@@ -149,6 +149,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rkbax"]
 size = Vector2(12, 26)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8t03j"]
+size = Vector2(12, 13)
+
 [node name="Marlo" type="CharacterBody2D"]
 collision_mask = 49
 floor_max_angle = 1.15192
@@ -175,29 +178,40 @@ zoom = Vector2(2, 2)
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_rkbax")
 
-[node name="PlayerStateMachine" type="Node" parent="."]
+[node name="CollisionShape2D_Crouch" type="CollisionShape2D" parent="."]
+position = Vector2(0, 9.5)
+shape = SubResource("RectangleShape2D_8t03j")
+disabled = true
+
+[node name="PlayerStateMachine" type="Node2D" parent="."]
 script = ExtResource("3_g1dw6")
 
-[node name="Idle" type="Node" parent="PlayerStateMachine"]
+[node name="Idle" type="Node2D" parent="PlayerStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("4_yw30f")
 
-[node name="Run" type="Node" parent="PlayerStateMachine"]
+[node name="Run" type="Node2D" parent="PlayerStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("5_rgyib")
 sprint_speed = 200.0
 skid_audio = ExtResource("6_hg6s5")
 
-[node name="Jump" type="Node" parent="PlayerStateMachine"]
+[node name="Jump" type="Node2D" parent="PlayerStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("6_rgyib")
 jump_audio = ExtResource("8_8t03j")
 acceleration = 20.0
 
-[node name="Fall" type="Node" parent="PlayerStateMachine"]
+[node name="Fall" type="Node2D" parent="PlayerStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("7_hg6s5")
 
-[node name="Crouch" type="Node" parent="PlayerStateMachine"]
+[node name="Crouch" type="Node2D" parent="PlayerStateMachine"]
 unique_name_in_owner = true
 script = ExtResource("5_boad6")
+
+[node name="RayCast2D" type="RayCast2D" parent="PlayerStateMachine/Crouch"]
+enabled = false
+target_position = Vector2(0, 21)
+collision_mask = 32
+hit_from_inside = true

@@ -11,7 +11,6 @@ var current_direction : float = 0
 var target_speed : float
 
 func enter() -> void:
-	print ("Entred run State")
 	current_acceleration = acceleration
 	target_speed = speed
 	if Input.is_action_pressed("action"):
@@ -20,7 +19,6 @@ func enter() -> void:
 	pass
 
 func exit() -> void:
-	print ("Exited Run State")
 	player.animation_player.current_animation_changed.disconnect(_on_animation_changed)
 	player.audio_stream_player_2d.stop()
 	player.animation_player.speed_scale = 1.0
@@ -43,6 +41,8 @@ func physics_process( _delta : float ) -> PlayerState:
 		return fall
 	if direction.x == 0:
 		return idle
+	elif direction.y >0:
+		return crouch
 	elif sign( direction.x ) == sign ( player.velocity.x ) or player.velocity.x == 0:
 		player.animation_player.play("run")
 		current_acceleration = acceleration
@@ -59,7 +59,6 @@ func physics_process( _delta : float ) -> PlayerState:
 	return null
 
 func _on_animation_changed ( _anim_name : String ) -> void:
-	print("Anim changed")
 	if _anim_name == "skid":
 		player.play_audio(skid_audio)
 	else:

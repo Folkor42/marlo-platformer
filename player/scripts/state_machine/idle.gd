@@ -15,12 +15,14 @@ func handle_input( _event : InputEvent ) -> PlayerState:
 	return null
 
 func process( _delta : float ) -> PlayerState:
-	if direction.x != 0:
-		return run
 	return null
 
 func physics_process( _delta : float ) -> PlayerState:
 	player.update_velocity (0,deceleration)
-	if !player.is_on_floor():
+	if direction.x != 0:
+		return run
+	elif direction.y >0:
+		return crouch
+	elif !player.is_on_floor():
 		return fall
 	return null
